@@ -41,14 +41,18 @@ dropdownContent.innerHTML = `
 `;
 projectsDropdown.parentNode.appendChild(dropdownContent);
 
+// Modified Click Handler for Projects Dropdown
 projectsDropdown.addEventListener('click', (e) => {
-    e.preventDefault();
-    dropdownContent.classList.toggle('show');
+    if (window.innerWidth > 768) { // Desktop behavior
+        e.preventDefault(); // Prevent navigation
+        dropdownContent.classList.toggle('show'); // Toggle dropdown
+    }
+    // On mobile (window.innerWidth ≤ 768px), allow default navigation to proyectos.html
 });
 
 // Close dropdown when clicking outside
 window.addEventListener('click', (e) => {
-    if (!e.target.matches('.projects-dropdown')) {
+    if (!e.target.matches('.projects-dropdown') && !e.target.closest('.dropdown-content')) {
         dropdownContent.classList.remove('show');
     }
 });
